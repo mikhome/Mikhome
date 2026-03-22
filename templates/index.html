@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MikHome — Conciergerie & Home Care à Ventabren</title>
+  <meta name="description"
+    content="MikHome : accueil voyageurs, remise des clés, ménage, linge, entretien piscine & jardin. Conciergerie locale à Ventabren, Éguilles, Aix-en-Provence et alentours." />
+  <link rel="canonical" href="https://www.mikhome.fr/" />
+  <meta name="theme-color" content="#1992d4" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MikHome — Conciergerie & Home Care en Provence" />
+  <meta property="og:description"
+    content="Accueil, ménage, linge, piscine, jardin, maintenance. Votre sérénité en Provence." />
+  <meta property="og:url" content="https://www.mikhome.fr/" />
+  <meta property="og:image" content="{{ url_for('static', filename='images/hero.jpg') }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}" />
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --brand: 204 96% 45%;
+      --brand-dark: 204 96% 35%;
+      --ink: 217 33% 17%;
+    }
+
+    .brand-bg {
+      background-color: hsl(var(--brand));
+    }
+
+    .brand-bg-dark {
+      background-color: hsl(var(--brand-dark));
+    }
+
+    .brand-text {
+      color: hsl(var(--brand));
+    }
+
+    .brand-border {
+      border-color: hsl(var(--brand));
+    }
+
+    .shadow-soft {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .07);
+    }
+
+    .glass {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, .55);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .skip-link:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: .5rem 1rem;
+      background: #fff;
+      border: 1px solid #94a3b8;
+      border-radius: .5rem;
+    }
+  </style>
+
+  <!-- Schema.org JSON-LD (LocalBusiness) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "MikHome",
+    "url": "https://www.mikhome.fr/",
+    "image": "{{ url_for('static', filename='images/hero.jpg') }}",
+    "email": "mikhome.conciergerie@gmail.com",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ventabren",
+      "postalCode": "13122",
+      "addressCountry": "FR"
+    },
+    "areaServed": ["Ventabren","Éguilles","Aix-en-Provence","Les Milles","Coudoux"],
+    "knowsAbout": ["Conciergerie","Remise des clés","Ménage","Linge","Entretien piscine","Jardin","Maintenance","Gestion d'annonces","Site de réservation directe"]
+  }
+  </script>
+</head>
+
+<body class="text-slate-800 antialiased">
+  <a href="#contenu" class="skip-link">Aller au contenu</a>
+
+  <!-- Barre d'annonce -->
+  <div class="brand-bg text-white text-center text-sm py-2">
+    <p>Zone : Ventabren, Éguilles, Aix-en-Provence et alentours</p>
+  </div>
+
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-50 bg-white/90 glass border-b border-slate-100" role="navigation"
+    aria-label="Navigation principale">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-3" aria-label="Accueil MikHome">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo MikHome" class="h-8 w-8 rounded-xl"
+            width="32" height="32" />
+          <div class="leading-tight">
+            <span class="font-semibold tracking-tight block">MikHome</span>
+            <span class="text-xs text-slate-500">Votre sérénité en Provence</span>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 font-medium">
+          <a href="#services" class="hover:text-slate-900">Services</a>
+          <a href="#packs" class="hover:text-slate-900">Packs</a>
+          <a href="#zone" class="hover:text-slate-900">Zone</a>
+          <a href="#avis" class="hover:text-slate-900">Avis</a>
+          <a href="#faq" class="hover:text-slate-900">FAQ</a>
+          <a href="#contact"
+            class="inline-flex items-center gap-2 brand-bg text-white px-4 py-2 rounded-xl shadow-soft">Demander un
+            devis</a>
+        </nav>
+        <button id="menuBtn"
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-lg border brand-border text-slate-700"
+          aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-100 bg-white" role="menu">
+      <div class="px-4 py-3 flex flex-col gap-4">
+        <a href="#services">Services</a>
+        <a href="#packs">Packs</a>
+        <a href="#zone">Zone</a>
+        <a href="#avis">Avis</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact"
+          class="inline-flex items-center justify-center brand-bg text-white px-4 py-2 rounded-xl">Demander un devis</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden" id="contenu">
+    <img loading="eager" src="{{ url_for('static', filename='images/hero.jpg') }}" alt="Maison en Provence avec piscine"
+      class="absolute inset-0 h-full w-full object-cover" width="2000" height="1200" />
+    <div class="relative isolate">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+        <div class="max-w-2xl bg-white/30 glass p-6 sm:p-8 rounded-2xl shadow-soft">
+          <p class="text-sm uppercase tracking-wide brand-text font-semibold">Conciergerie locale</p>
+          <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900">Conciergerie & Home Care en Provence
+          </h1>
+          <ul class="mt-4 flex flex-wrap gap-3 text-slate-700 text-sm">
+            <li class="bg-white/70 px-3 py-1 rounded-full border">Accueil & clés</li>
+            <li class="bg-white/70 px-3 py-1 rounded-full border">Ménage & linge</li>
+            <li class="bg-white/70 px-3 py-1 rounded-full border">Piscine & jardin</li>
+            <li class="bg-white/70 px-3 py-1 rounded-full border">Maintenance légère</li>
+          </ul>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#contact" class="brand-bg text-white px-5 py-3 rounded-xl">Obtenir un devis</a>
+            <a href="#services" class="px-5 py-3 rounded-xl border brand-border bg-white">Voir les services</a>
+          </div>
+          <p class="mt-4 text-sm text-slate-600">Assurés RC pro · Réponse rapide · Sans engagement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-bold tracking-tight">Nos services</h2>
+      </div>
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article
+          class="bg-white rounded-2xl shadow-soft overflow-hidden border border-slate-100 col-span-1 sm:col-span-2 lg:col-span-3">
+          <img loading="lazy" src="{{ url_for('static', filename='images/services/annonces.jpg') }}"
+            alt="Gestion des annonces et site dédié pour votre bien" class="h-48 w-full object-cover" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold">Gestion des annonces & site dédié</h3>
+            <p class="mt-2 text-slate-600">
+              Gestion de vos annonces sur plusieurs plateformes (mises à jour, calendrier, photos, positionnement),
+              <strong>mise en lumière de votre demeure</strong> et création d’un <strong>site internet dédié</strong>
+              pour la
+              <strong>réservation directe</strong> afin de maximiser vos revenus.
+            </p>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden border border-slate-100">
+          <img loading="lazy" src="{{ url_for('static', filename='images/services/accueil.jpg') }}"
+            alt="Accueil et remise des clés" class="h-48 w-full object-cover" width="1200" height="800" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold">Accueil & Remise des clés</h3>
+            <p class="mt-2 text-slate-600">Check-in/out, présentation du logement, état des lieux, conseils locaux.</p>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden border border-slate-100">
+          <img loading="lazy" src="{{ url_for('static', filename='images/services/menage.jpg') }}"
+            alt="Équipe de ménage professionnelle" class="h-48 w-full object-cover" width="1200" height="800" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold">Ménage professionnel</h3>
+            <p class="mt-2 text-slate-600">Nettoyage entre séjours, consommables, contrôle qualité avant chaque arrivée.
+            </p>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden border border-slate-100">
+          <img loading="lazy" src="{{ url_for('static', filename='images/services/linge.jpg') }}"
+            alt="Linge et draps pliés" class="h-48 w-full object-cover" width="1200" height="800" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold">Linge & Draps</h3>
+            <p class="mt-2 text-slate-600">Location, collecte/blanchisserie. Lit prêt à l'arrivée, serviettes et tapis
+              de bain.</p>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden border border-slate-100">
+          <img loading="lazy" src="{{ url_for('static', filename='images/services/piscine.jpg') }}"
+            alt="Entretien de piscine" class="h-48 w-full object-cover" width="1200" height="800" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold">Entretien piscine</h3>
+            <p class="mt-2 text-slate-600">Analyse & équilibre de l'eau, nettoyage, hivernage et remise en route.</p>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden border border-slate-100">
+          <img loading="lazy" src="{{ url_for('static', filename='images/services/jardin.jpg') }}"
+            alt="Jardin et extérieurs entretenus" class="h-48 w-full object-cover" width="1200" height="800" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold">Jardin & Extérieurs</h3>
+            <p class="mt-2 text-slate-600">Tonte, taille, arrosage, petites réparations et maintien des espaces.</p>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-soft overflow-hidden border border-slate-100">
+          <img loading="lazy" src="{{ url_for('static', filename='images/services/maintenance.jpg') }}"
+            alt="Outils de maintenance" class="h-48 w-full object-cover" width="1200" height="800" />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold">Petite maintenance</h3>
+            <p class="mt-2 text-slate-600">Électricité et plomberie légères, dépannage Internet, coordination
+              d'artisans.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packs & Tarifs -->
+  <section id="packs" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-bold tracking-tight">Packs & Tarifs</h2>
+        <p class="mt-2 text-slate-600"></p>
+      </div>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="border border-slate-200 rounded-2xl p-8 shadow-soft">
+          <h3 class="text-xl font-semibold">Essentiel</h3>
+          <p class="mt-2 text-slate-600">Idéal pour débuter</p>
+          <p class="mt-6 text-4xl font-bold">39€<span class="text-base font-medium">/séjour</span></p>
+          <ul class="mt-6 space-y-2 text-slate-700 list-disc list-inside">
+            <li>Check-in / Check-out</li>
+            <li>État des lieux</li>
+            <li>Assistance 7j/7</li>
+          </ul>
+          <a href="#contact" class="mt-8 inline-block brand-bg text-white px-5 py-3 rounded-xl">Choisir</a>
+        </div>
+
+        <div class="border-2 brand-border rounded-2xl p-8 shadow-soft">
+          <h3 class="text-xl font-semibold">Confort</h3>
+          <p class="mt-2 text-slate-600">Le plus populaire</p>
+          <p class="mt-6 text-4xl font-bold">59€<span class="text-base font-medium">/séjour</span></p>
+          <ul class="mt-6 space-y-2 text-slate-700 list-disc list-inside">
+            <li>Accueil complet</li>
+            <li>Ménage standard</li>
+            <li>Linge & lits faits</li>
+          </ul>
+          <a href="#contact" class="mt-8 inline-block brand-bg text-white px-5 py-3 rounded-xl">Choisir</a>
+        </div>
+
+        <div class="border border-slate-200 rounded-2xl p-8 shadow-soft">
+          <h3 class="text-xl font-semibold">Premium</h3>
+          <p class="mt-2 text-slate-600">Tout inclus</p>
+          <p class="mt-6 text-4xl font-bold">Sur devis</p>
+          <ul class="mt-6 space-y-2 text-slate-700 list-disc list-inside">
+            <li>Ménage hôtelier</li>
+            <li>Entretien piscine & jardin</li>
+            <li>Maintenance prioritaire</li>
+          </ul>
+          <a href="#contact" class="mt-8 inline-block brand-bg text-white px-5 py-3 rounded-xl">Demander un devis</a>
+        </div>
+      </div>
+      <p class="mt-4 text-xs text-slate-500">Tarifs indicatifs, susceptibles d'évolution selon la saison et la taille du
+        bien.</p>
+    </div>
+  </section>
+
+  <!-- Zone d'intervention -->
+  <section id="zone" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight">Zone d'intervention</h2>
+          <p class="mt-4 text-slate-600">Basés à Ventabren, nous intervenons à Éguilles, Aix-en-Provence, Les Milles,
+            Coudoux et villages alentours.</p>
+          <ul class="mt-6 grid grid-cols-2 gap-3 text-slate-700">
+            <li class="flex items-center gap-2">✅ Ventabren</li>
+            <li class="flex items-center gap-2">✅ Éguilles</li>
+            <li class="flex items-center gap-2">✅ Aix-en-Provence</li>
+            <li class="flex items-center gap-2">✅ Les Milles</li>
+            <li class="flex items-center gap-2">✅ Coudoux</li>
+            <li class="flex items-center gap-2">✅ Pays d'Aix</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-soft border border-slate-200">
+          <img loading="lazy" src="{{ url_for('static', filename='images/zone.jpg') }}"
+            alt="Paysage de Provence (zone d'intervention)" class="w-full h-96 object-cover" width="1600"
+            height="900" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Avis -->
+  <section id="avis" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-bold tracking-tight">Ils nous font confiance</h2>
+        <p class="mt-2 text-slate-600"></p>
+      </div>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <figure class="p-6 border border-slate-200 rounded-2xl shadow-soft">
+          <blockquote class="text-slate-700">« Service impeccable, nos voyageurs étaient ravis ! »</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-500">— Sophie, Ventabren</figcaption>
+        </figure>
+        <figure class="p-6 border border-slate-200 rounded-2xl shadow-soft">
+          <blockquote class="text-slate-700">« Équipe réactive et soigneuse, je recommande. »</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-500">— Marc, Aix-en-Provence</figcaption>
+        </figure>
+        <figure class="p-6 border border-slate-200 rounded-2xl shadow-soft">
+          <blockquote class="text-slate-700">« Piscine et jardin toujours parfaits. »</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-500">— Clara, Éguilles</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-bold tracking-tight">Questions fréquentes</h2>
+        <p class="mt-2 text-slate-600"></p>
+      </div>
+      <div class="mt-10 space-y-6">
+        <details class="group border border-slate-200 rounded-2xl p-6">
+          <summary class="cursor-pointer select-none font-semibold">Avec quelles plateformes travaille-vous ?</summary>
+          <p class="mt-3 text-slate-700">Airbnb, Booking, Expedia, Elite Partner, Google Vacation Rentals.</p>
+        </details>
+        <details class="group border border-slate-200 rounded-2xl p-6">
+          <summary class="cursor-pointer select-none font-semibold">Proposez-vous des prestations à la carte ?</summary>
+          <p class="mt-3 text-slate-700">Oui : gestion des annonces/réservations, accueil, ménage, linge, piscine,
+            jardin et maintenance peuvent être
+            réservés séparément.</p>
+        </details>
+        <details class="group border border-slate-200 rounded-2xl p-6">
+          <summary class="cursor-pointer select-none font-semibold">Êtes-vous assurés ?</summary>
+          <p class="mt-3 text-slate-700">Oui, responsabilité civile professionnelle. Attestation sur demande.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight">Contact & Devis</h2>
+          <p class="mt-3 text-slate-600">Expliquez votre besoin, on vous répond rapidement.</p>
+          <ul class="mt-6 space-y-2 text-slate-700">
+            <li>📞 <span class="text-slate-500">Prochainement</span></li>
+            <li>✉️ <a href="mailto:mikhome.conciergerie@gmail.com" class="underline">mikhome.conciergerie@gmail.com</a>
+            </li>
+            <li>📍 Ventabren (13122), France</li>
+            <li>🕘 Lun-Sam : 9h-19h</li>
+          </ul>
+        </div>
+
+        <form action="https://formsubmit.co/mikhome.conciergerie@gmail.com" method="POST"
+          class="bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-soft">
+
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="Demande de devis – MikHome">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://example.com/merci.html">
+
+          <input type="text" name="_honeypot" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="prenom" class="text-sm text-slate-600">Prénom</label>
+              <input id="prenom" name="prenom" class="mt-1 w-full border border-slate-300 rounded-xl px-3 py-2"
+                required />
+            </div>
+            <div>
+              <label for="nom" class="text-sm text-slate-600">Nom</label>
+              <input id="nom" name="nom" class="mt-1 w-full border border-slate-300 rounded-xl px-3 py-2" required />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="email" class="text-sm text-slate-600">Email</label>
+              <input id="email" name="email" type="email"
+                class="mt-1 w-full border border-slate-300 rounded-xl px-3 py-2" required />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="message" class="text-sm text-slate-600">Message</label>
+              <textarea id="message" name="message" rows="4"
+                class="mt-1 w-full border border-slate-300 rounded-xl px-3 py-2"
+                placeholder="Dates, adresse, services souhaités…" required></textarea>
+            </div>
+          </div>
+
+          <button class="mt-4 brand-bg text-white px-5 py-3 rounded-xl w-full">Envoyer</button>
+          <p class="mt-3 text-xs text-slate-500">En envoyant ce formulaire, vous acceptez notre <a
+              href="#confidentialite" class="underline">politique de confidentialité</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mentions légales -->
+  <section id="mentions" class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold">Mentions légales</h2>
+      <div class="mt-4 space-y-2 text-slate-700 text-sm">
+        <p><strong>Éditeur :</strong> MikHome — Statut : Auto-entreprise (exemple). SIREN : 000 000 000. Siège : 13122
+          Ventabren. Responsable de publication : Nom Prénom.</p>
+        <p><strong>Hébergeur :</strong> OVHcloud, 2 rue Kellermann, 59100 Roubaix, France — 09 72 10 10 07.</p>
+        <p><strong>Contact :</strong> <a href="mailto:mikhome.conciergerie@gmail.com"
+            class="underline">mikhome.conciergerie@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Politique de confidentialité -->
+  <section id="confidentialite" class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold">Politique de confidentialité</h2>
+      <div class="mt-4 space-y-3 text-slate-700 text-sm">
+        <p>Nous collectons uniquement les informations nécessaires au traitement de votre demande (nom, email, message).
+          Base légale : intérêt légitime / pré-contractuel.</p>
+        <p>Vos données ne sont ni vendues ni partagées en dehors des besoins de prestation. Durée de conservation : 3
+          ans maximum après le dernier contact.</p>
+        <p>Vous disposez de droits d'accès, de rectification, d'opposition, d'effacement et de portabilité. Pour les
+          exercer : <a href="mailto:mikhome.conciergerie@gmail.com"
+            class="underline">mikhome.conciergerie@gmail.com</a>.</p>
+        <p>Cookies : techniques indispensables au fonctionnement du site ; statistiques (optionnels) activés uniquement
+          avec votre consentement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo MikHome" class="h-8 w-8 rounded-xl"
+              width="32" height="32" />
+            <div>
+              <span class="font-semibold">MikHome</span>
+              <p class="text-xs text-slate-500">Votre sérénité en Provence</p>
+            </div>
+          </div>
+          <p class="mt-3 text-slate-600">Conciergerie & Home Care en Provence. Sérénité pour vos locations et résidences
+            secondaires.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold">Liens</h4>
+          <ul class="mt-3 space-y-2 text-slate-700">
+            <li><a href="#services" class="underline">Services</a></li>
+            <li><a href="#packs" class="underline">Packs</a></li>
+            <li><a href="#faq" class="underline">FAQ</a></li>
+            <li><a href="#mentions" class="underline">Mentions légales</a></li>
+            <li><a href="#confidentialite" class="underline">Confidentialité</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold">Contact</h4>
+          <ul class="mt-3 space-y-2 text-slate-700">
+            <li><span class="text-slate-500">Téléphone : prochainement</span></li>
+            <li><a href="mailto:mikhome.conciergerie@gmail.com" class="underline">mikhome.conciergerie@gmail.com</a>
+            </li>
+            <li>Ventabren (13122), France</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 text-xs text-slate-500">© <span id="year"></span> MikHome — Tous droits réservés.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('hidden');
+      });
+    }
+  </script>
+</body>
+
+</html>
