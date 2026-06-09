@@ -35,7 +35,7 @@ Message :
 """)
 
     with smtplib.SMTP("smtp.mail.ovh.net", 587, timeout=15) as smtp:
-    smtp.starttls()
+        smtp.starttls()
         smtp.login(os.environ["SMTP_USER"], os.environ["SMTP_PASSWORD"])
         smtp.send_message(msg)
 
