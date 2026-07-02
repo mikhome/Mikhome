@@ -1,7 +1,6 @@
 import requests
 import os
-import smtplib
-from email.message import EmailMessage
+
 
 from flask import Flask, render_template, request, redirect
 
