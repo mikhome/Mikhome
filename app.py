@@ -1,7 +1,5 @@
-import requests
 import os
-
-
+import requests
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
@@ -17,44 +15,27 @@ def contact():
     email = request.form.get("email", "")
     message = request.form.get("message", "")
 
-    msg = EmailMessage()
-    msg["Subject"] = "Nouvelle demande de devis - MikHome"
-    msg["From"] = os.environ["SMTP_USER"]
-    msg["To"] = os.environ["SMTP_USER"]
-    msg["Reply-To"] = email
-
-    msg.set_content(f"""
-Nouvelle demande depuis le site MikHome.
-
-Prénom : {prenom}
-Nom : {nom}
-Email : {email}
-
-Message :
-{message}
-""")
-
     headers = {
-    "accept": "application/json",
-    "api-key": os.environ["BREVO_API_KEY"],
-    "content-type": "application/json"
-}
+        "accept": "application/json",
+        "api-key": os.environ["BREVO_API_KEY"],
+        "content-type": "application/json"
+    }
 
-payload = {
-    "sender": {
-        "name": "MikHome",
-        "email": "contact@mikhome.fr"
-    },
-    "to": [
-        {
+    payload = {
+        "sender": {
+            "name": "MikHome",
             "email": "contact@mikhome.fr"
-        }
-    ],
-    "replyTo": {
-        "email": email
-    },
-    "subject": "Nouvelle demande de devis - MikHome",
-    "textContent": f"""
+        },
+        "to": [
+            {
+                "email": "contact@mikhome.fr"
+            }
+        ],
+        "replyTo": {
+            "email": email
+        },
+        "subject": "Nouvelle demande de devis - MikHome",
+        "textContent": f"""
 Nouvelle demande depuis le site MikHome.
 
 Prénom : {prenom}
@@ -65,18 +46,20 @@ Message :
 
 {message}
 """
-}
+    }
 
-response = requests.post(
-    "https://api.brevo.com/v3/smtp/email",
-    headers=headers,
-    json=payload,
-    timeout=15
-)
-
-response.raise_for_status()
+    try:
+        response = requests.post(
+            "https://api.brevo.com/v3/smtp/email",
+            headers=headers,
+            json=payload,
+            timeout=15
+        )
+        print(response.status_code)
+        print(response.text)
+        response.raise_for_status()
     except Exception as e:
-        print("ERREUR SMTP :", repr(e))
+        print("ERREUR BREVO :", repr(e))
         raise
 
     return redirect("/#contact")
