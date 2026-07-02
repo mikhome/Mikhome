@@ -1,3 +1,4 @@
+import requests
 import os
 import smtplib
 from email.message import EmailMessage
@@ -34,11 +35,47 @@ Message :
 {message}
 """)
 
-    try:
-        with smtplib.SMTP("smtp.mail.ovh.net", 587, timeout=15) as smtp:
-            smtp.starttls()
-            smtp.login(os.environ["SMTP_USER"], os.environ["SMTP_PASSWORD"])
-            smtp.send_message(msg)
+    headers = {
+    "accept": "application/json",
+    "api-key": os.environ["BREVO_API_KEY"],
+    "content-type": "application/json"
+}
+
+payload = {
+    "sender": {
+        "name": "MikHome",
+        "email": "contact@mikhome.fr"
+    },
+    "to": [
+        {
+            "email": "contact@mikhome.fr"
+        }
+    ],
+    "replyTo": {
+        "email": email
+    },
+    "subject": "Nouvelle demande de devis - MikHome",
+    "textContent": f"""
+Nouvelle demande depuis le site MikHome.
+
+Prénom : {prenom}
+Nom : {nom}
+Email : {email}
+
+Message :
+
+{message}
+"""
+}
+
+response = requests.post(
+    "https://api.brevo.com/v3/smtp/email",
+    headers=headers,
+    json=payload,
+    timeout=15
+)
+
+response.raise_for_status()
     except Exception as e:
         print("ERREUR SMTP :", repr(e))
         raise
